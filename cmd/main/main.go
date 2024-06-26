@@ -1,12 +1,16 @@
 package main
 
 import (
-    "fmt"
-    "github.com/florin12er/goBookstore/config"
+    "log"
+    "net/http"
+    "github.com/gorilla/mux"
+    _ "github.com/jinzhu/gorm/dialects/postgres"
+    "github.com/florin12er/goBookstore/pkg/routes"
 )
 
 func main() {
-databaseURL := "postgresql://florin:florin12er@localhost:5432/gobooklibrary"
-
-config.Connect(databaseURL)
+    r := mux.NewRouter()
+    routes.RegisterBookStoreRoutes(r)
+    http.Handle("/",r)
+    log.Fatal(http.ListenAndServe("localhost:3000",r))
 }

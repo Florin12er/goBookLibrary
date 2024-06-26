@@ -7,8 +7,8 @@ import (
 
 var db *gorm.DB
 
-func Connect(databaseURL string) {
-    d, err := gorm.Open("postgres", databaseURL)
+func Connect() {
+    d, err := gorm.Open("postgres", "postgresql://florin:florin12er@localhost:5432/gobooklibrary?sslmode=disable")
     if err != nil {
         panic(err)
     }
